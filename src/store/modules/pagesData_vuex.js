@@ -1,3 +1,4 @@
+import { pageHideCheck_tool } from "../../utils/tools";
 const state = {
     pages: [
         {
@@ -15,19 +16,19 @@ const state = {
                     title: "DHCP状态信息",
                     key: "1-2",
                     route: "",
-                    show: true
+                    show: 1//隐藏位
                 },
                 {
                     title: "WIFI-2.4G状态信息",
                     key: "1-3",
                     route: "",
-                    show: true
+                    show: 2
                 },
                 {
                     title: "WIFI-5G状态信息",
                     key: "1-4",
                     route: "",
-                    show: true
+                    show: 3
                 }
             ]
         },
@@ -47,7 +48,7 @@ const state = {
                     title: "ANDLINK",
                     key: "2-2",
                     route: "",
-                    show: true
+                    show: 4
                 }
             ]
         },
@@ -66,7 +67,7 @@ const state = {
                     title: "辅Wi-Fi配置",
                     key: "3-2",
                     route: "",
-                    show: true
+                    show: 5
                 },
                 {
                     title: "Wi-Fi定时",
@@ -149,25 +150,25 @@ const state = {
                     title: "静态ARP绑定",
                     key: "6-5",
                     route: "",
-                    show: true
+                    show: 6
                 },
                 {
                     title: "ACL过滤",
                     key: "6-6",
                     route: "",
-                    show: true
+                    show: 7
                 },
                 {
                     title: "UPNP",
                     key: "6-7",
                     route: "",
-                    show: true
+                    show: 8
                 },
                 {
                     title: "网速限制",
                     key: "6-8",
                     route: "",
-                    show: true
+                    show: 9
                 }
             ]
         },
@@ -211,27 +212,92 @@ const state = {
                     title: "日志导出",
                     key: "7-6",
                     route: "",
-                    show: true
+                    show: 10
                 },
                 {
                     title: "配置升级",
                     key: "7-7",
                     route: "",
-                    show: true
+                    show: 11
                 }
             ]
         }
     ],
-}
-const getters = {
-    pages: (state) => {
-        for (let n in state.pages) {
-            let newitem = state.pages[n].child.filter(i => {
-                return i.show;
-            });
-            state.pages[n]["child"] = newitem;
-        }
-        return state.pages;
+    routesArr: {
+        '1-1': [
+            { name: "device_status", title: "设备状态", show: true },
+        ],
+        '1-2': [
+            { name: "dhcp_status", title: "DHCP", show: true },
+            { name: "lan_list", title: "LAN设备列表", show: 1 },
+        ],
+        '1-3': [
+            { name: "wifi_status", title: "2.4G", show: true },
+            { name: "wifi_status", title: "2.4G_1", show: true },
+            { name: "wifi_status", title: "2.4G_2", show: true },
+            { name: "wifi_status", title: "2.4G_3", show: true },
+            { name: "connect_list", title: "连接客户端列表", show: true },
+        ],
+        '1-4': [
+            { name: "wifi_status", title: "5G", show: true },
+            { name: "wifi_status", title: "5G_1", show: true },
+            { name: "wifi_status", title: "5G_2", show: true },
+            { name: "wifi_status", title: "5G_3", show: true },
+            { name: "connect_list", title: "连接客户端列表", show: true },
+        ],
+        '2-1': [
+            { name: "broadband", title: "宽带设置", show: true },
+            { name: "/relay_setting", title: "2.4G中继设置", show: 1 },
+            { name: "/relay_setting", title: "5G中继设置", show: 1 },
+            { name: "relay", title: "无线中继", show: true }
+        ],
+        '2-2': [
+            { name: "andlink", title: "ANDLINK", show: 1 }
+        ],
+        '7-1': [
+            { name: "device_info", title: "设备信息", show: true }
+        ]
+    },
+    route: [{ name: "device_status", title: "设备状态", show: true }],
+    breadcrumbItems: {
+        "0": "系统状态",
+        "1": "设备状态"
     }
 }
-export default { state, getters }
+const getters = {
+    pages: state => {
+        let pages = JSON.parse(JSON.stringify(state.pages))
+        for (let n in pages) {
+            let child = pages[n].child, newChild = [];
+            if (child.length > 0) {
+                for (let i in child) {
+                    if (pageHideCheck_tool(child[i].show) || child[i].show === true) {
+                        newChild.push(child[i])
+                    }
+                }
+            }
+            pages[n]["child"] = newChild;
+        }
+        return pages;
+    },
+    route: state => {
+        let route = JSON.parse(JSON.stringify(state.route)), newRoute = [];
+        for (let i in route) {
+            if (pageHideCheck_tool(route[i].show) || route[i].show === true) {
+                newRoute.push(route[i])
+            }
+        }
+        return newRoute
+    },
+    breadcrumbItems: state => state.breadcrumbItems
+}
+const mutations = {
+    setRoute: (state, data) => {
+        state.route = state.routesArr[data]
+    },
+    setBreadcrumbItems: (state, data) => {
+        state.breadcrumbItems[data.index] = data.value
+    }
+}
+const actions = {}
+export default { state, getters, mutations, actions }

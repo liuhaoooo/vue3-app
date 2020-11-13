@@ -41,7 +41,9 @@ export default {
       console.log(msg.value, "============");
     });
     /**生命周期 */
-    onMounted(init);
+    onMounted(()=>{
+      init()
+    });
     /**自定义方法 */
     const addCount = () => {
       count.value++;

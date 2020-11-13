@@ -1,33 +1,36 @@
 module.exports = {
 	lintOnSave: false,
-	publicPath: '/',
+	publicPath: './',
 	outputDir: 'dist',
 	assetsDir: './admin/',
 	devServer: {
-		disableHostCheck: true,
-		// proxy: {
-		// 	'/v1': {
-		// 		target: 'http://api.douban.com/v1',
-		// 		changeOrigin: true,
-		// 		ws: true,
-		// 		pathRewrite: {
-		// 			'^/v1': ''
-		// 		}
-		// 	}
-		// }
+		open: true,
+		host: 'localhost',
+		port: 8888,
+		https: false,
+		proxy: {
+			'/cgi': {
+				target: 'http://192.168.10.1',
+				ws: true,
+				changOrigin: true,
+				pathRewrite: {
+					'^/cgi': '/cgi-bin/http.cgi'
+				}
+			}
+		}
 	},
 	css: {
 		loaderOptions: {
-		  less: {
-			lessOptions: {
-			  modifyVars: {
-				'primary-color': '#1DA57A',
-				'link-color': '#1DA57A',
-				'border-radius-base': '2px',
-			  },
-			  javascriptEnabled: true,
+			less: {
+				lessOptions: {
+					modifyVars: {
+						'primary-color': '#1DA57A',
+						'link-color': '#1DA57A',
+						'border-radius-base': '2px',
+					},
+					javascriptEnabled: true,
+				},
 			},
-		  },
 		},
-	  }
+	}
 };
