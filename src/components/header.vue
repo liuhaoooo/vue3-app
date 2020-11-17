@@ -2,7 +2,7 @@
   <div class="header_div">
     <div class="header_logo"></div>
     <div class="header_info">
-      <div class="header_info1">安连宝WF-2</div>
+      <div class="header_info1">{{t('header.title')}}</div>
       <div class="header_info2">
         <div>
           <WifiOutlined :style="`color:${wifi2g_color};font-size:26px`" />&nbsp;2.4G Wi-Fi
@@ -13,16 +13,16 @@
       </div>
       <div class="header_info3">
         <div>
-          <SendOutlined />&nbsp;快速向导{{ t('home') }}
+          <SendOutlined />&nbsp;{{t('header.step')}}
         </div>
         <div @mouseover="show_qr=true" @mouseout="show_qr=false">
-          <TabletOutlined />&nbsp;APP下载
+          <TabletOutlined />&nbsp;{{t('header.appdow')}}
         </div>
         <div @click="restart">
-          <ReloadOutlined />&nbsp;重启路由器
+          <ReloadOutlined />&nbsp;{{t('header.restart')}}
         </div>
         <div @click="logout">
-          <LogoutOutlined />&nbsp;安全退出
+          <LogoutOutlined />&nbsp;{{t('header.logout')}}
         </div>
       </div>
     </div>
@@ -31,10 +31,10 @@
     <img src="../assets/images/qr.png" alt />
     <br />
     <div>
-      扫描二维码
-      <br />或在应用市场搜索<br />
-      <span style="color: rgb(30, 109, 255);">和家亲</span>
-      <br />下载安装APP
+      {{t('header.qr1')}}
+      <br />{{t('header.qr2')}}<br />
+      <span style="color: rgb(30, 109, 255);">{{t('header.qr3')}}</span>
+      <br />{{t('header.qr4')}}
     </div>
   </div>
 </template>
@@ -82,9 +82,10 @@ export default {
 //右边操作栏
 function right(props, ctx) {
   const router = useRouter();
+  const { t } = useI18n()
   const show_qr = ref(false);
-  const logout = () => logout_tool("确定要退出登录吗?");
-  const restart = () => restart_tool("确定要重启路由器吗?");
+  const logout = () => logout_tool(t('tips.logout'));
+  const restart = () => restart_tool(t('tips.restart'));
   return {
     logout,
     restart,

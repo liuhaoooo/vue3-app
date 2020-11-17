@@ -39,6 +39,7 @@ const actions = {
     getNetworkInfo: async (state, data) => {
         let res = await axiosRequest_get({ cmd: CMD.NETWORK_INFO });
         state.commit('setNetworkInfo', res)
+        console.log(res)
     },
     getWifi5gInfo: async (state, data) => {
         let res = await axiosRequest_get({ cmd: CMD.WIRELESS5G_CONFIG, subcmd: data.subcmd });

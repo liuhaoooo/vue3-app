@@ -3,6 +3,8 @@ import router from "../router";
 import { axiosRequest_post, axiosRequest_get } from "../utils/request";
 import store from "../store";
 import { Modal } from "ant-design-vue";
+import { rsaPubKey,rsaPrivateKey } from "../config/config"
+import { JSEncrypt } from 'jsencrypt';
 export const logout_tool = title => {
     if (!title) {
         axiosRequest_post({ cmd: CMD.LOGOUT }).then(res => {
@@ -84,4 +86,19 @@ export const pageHideCheck_tool = index => {
             return false;
         }
     }
+}
+//rsa加密
+export const rsaEnc_tool = data => {
+    let encryptStr = new JSEncrypt();
+    encryptStr.setPublicKey(rsaPubKey);
+    let result = encryptStr.encrypt(JSON.stringify(data));
+    return result;
+}
+//rsa解密
+export const rsaDec_tool = data => {
+    let decrypt = new JSEncrypt()
+    decrypt.setPrivateKey(rsaPrivateKey)
+    let result = decrypt.decrypt(data)
+    result = JSON.parse(result)
+    return result
 }

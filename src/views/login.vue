@@ -2,13 +2,13 @@
   <div class="login_content">
     <div class="login_main">
       <img src="../assets/images/login_logo.png" alt />
-      <label>欢迎使用安连宝路由器</label>
+      <label>{{t('login.welcome')}}</label>
       <!--  -->
       <a-form>
         <a-form-item v-bind="validateInfos.userName">
           <a-input
             v-model:value="modelRef.userName"
-            placeholder="输入用户名"
+            :placeholder="t('login.username')"
             enter-button
             size="large"
             :disabled="loginTimesIsShow"
@@ -21,8 +21,8 @@
         <a-form-item v-bind="validateInfos.password">
           <a-input-search
             v-model:value="modelRef.password"
-            placeholder="输入密码"
-            :enter-button="loginTimesIsShow?times:'登录'"
+            :placeholder="t('login.password')"
+            :enter-button="loginTimesIsShow?times:t('login.tologin')"
             :disabled="loginTimesIsShow"
             size="large"
             @search="toLogin"
@@ -35,17 +35,16 @@
           </a-input-search>
         </a-form-item>
       </a-form>
-      <!--  -->
       <a-tooltip placement="right">
-        <template v-slot:title>如忘记密码，请恢复出厂设置。恢复方法:长按路由器Reset键4秒。</template>
-        <p style="width:80px">忘记密码?</p>
+        <template v-slot:title>{{t('login.forgetPassInfo')}}</template>
+        <p style="width:80px">{{t('login.forgetPass')}}</p>
       </a-tooltip>
-      <!-- <span>{{times}}</span> -->
       <div class="login_qr">
         <img src="../assets/images/qr.png" alt />
         <span>
-          扫码下载
-          <br />和家亲APP
+          {{t('login.qr')}}
+          <br />
+          {{t('login.app')}}
         </span>
       </div>
     </div>
@@ -60,6 +59,8 @@ import { Modal } from "ant-design-vue";
 import { useRoute, useRouter } from "vue-router";
 import { axiosRequest_post, axiosRequest_get } from "../utils/request";
 import { useForm } from "@ant-design-vue/use";
+import { rsaEnc_tool, rsaDec_tool } from "../utils/tools";
+import { useI18n } from "vue-i18n";
 import {
   UserOutlined,
   LockOutlined,
@@ -72,6 +73,7 @@ export default {
     CaretRightOutlined
   },
   setup(props, ctx) {
+    const { t } = useI18n();
     const modelRef = reactive({
       userName: "",
       password: ""
@@ -80,13 +82,13 @@ export default {
       userName: [
         {
           required: true,
-          message: "请输入账号"
+          message: t("login.username")
         }
       ],
       password: [
         {
           required: true,
-          message: "请输入密码"
+          message: t("login.password")
         }
       ]
     });
@@ -113,10 +115,10 @@ export default {
               if (res.login_fail == "fail") {
                 logining.value = false;
                 Modal.error({
-                  okText: "知道了",
+                  okText: t("login.okText"),
                   centered: true,
-                  title: "登录失败，账号或者密码错误",
-                  content: `剩余登录次数 ${res.login_times}`
+                  title: t("login.tipTitle"),
+                  content: t("login.tipContent") + res.login_times
                 });
                 if (parseInt(res.login_times, 10) < 1) {
                   getNextText();
@@ -146,6 +148,7 @@ export default {
       }
     };
     return {
+      t,
       logining,
       toLogin,
       times,
