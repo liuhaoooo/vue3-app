@@ -1,6 +1,7 @@
 import axios from 'axios'
 import router from '../router'
 import { message } from 'ant-design-vue';
+import { rsaEnc_tool, rsaDec_tool } from "../utils/tools";
 message.config({
   top: `150px`,
   duration: 3,
@@ -32,13 +33,13 @@ request.interceptors.response.use((response) => {
 
 export const axiosRequest_get = async (data) => {
   data.method = 'GET'
-  data.sessionId = sessionStorage['sessionId'] || ''
+  data.sessionId = rsaDec_tool(sessionStorage['sessionId']) || ''
   let res = await request({ data })
   return res
 }
 export const axiosRequest_post = async (data) => {
   data.method = 'POST'
-  data.sessionId = sessionStorage['sessionId'] || ''
+  data.sessionId = rsaDec_tool(sessionStorage['sessionId']) || ''
   let res = await request({ data })
   return res
 }

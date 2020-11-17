@@ -47,6 +47,10 @@
           {{t('login.app')}}
         </span>
       </div>
+      <a-select v-model:value="lang" style="width: 120px" @select="langChange">
+        <a-select-option value="zh">中文</a-select-option>
+        <a-select-option value="en">English</a-select-option>
+      </a-select>
     </div>
   </div>
 </template>
@@ -61,6 +65,7 @@ import { axiosRequest_post, axiosRequest_get } from "../utils/request";
 import { useForm } from "@ant-design-vue/use";
 import { rsaEnc_tool, rsaDec_tool } from "../utils/tools";
 import { useI18n } from "vue-i18n";
+import { setLang } from "../i18n";
 import {
   UserOutlined,
   LockOutlined,
@@ -74,6 +79,7 @@ export default {
   },
   setup(props, ctx) {
     const { t } = useI18n();
+    const lang = ref("zh");
     const modelRef = reactive({
       userName: "",
       password: ""
@@ -100,6 +106,9 @@ export default {
     onMounted(() => {
       getNextText();
     });
+    const langChange = (val) =>{
+      setLang(val)
+    }
     const toLogin = () => {
       validate()
         .then(res => {
@@ -124,8 +133,8 @@ export default {
                   getNextText();
                 }
               } else {
-                sessionStorage.setItem("sessionId", res.sessionId);
-                sessionStorage.setItem("level", res.user_level);
+                sessionStorage.setItem("sessionId", rsaEnc_tool(res.sessionId));
+                sessionStorage.setItem("level", rsaEnc_tool(res.user_level));
                 router.push("/device_status");
               }
             })
@@ -149,6 +158,8 @@ export default {
     };
     return {
       t,
+      lang,
+      langChange,
       logining,
       toLogin,
       times,

@@ -64,7 +64,7 @@ export const parseHexPageHide_tool = hex => {
 }
 export const pageHideCheck_tool = index => {
     let arr = store.getters['config_vuex/webPageFlag'];
-    let level = sessionStorage['level']
+    let level = rsaDec_tool(sessionStorage['level'])
     if (arr[index] == "1") {
         if (level == "1" || level == "2") {
             return true;

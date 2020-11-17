@@ -1,31 +1,33 @@
 import { pageHideCheck_tool } from "../../utils/tools";
+import { i18n } from "../../i18n"
+const { t } = i18n.global
 const state = {
     pages: [
         {
-            title: "系统状态",
+            title: t('menu.sysStatus'),
             icon: "CopyOutlined",
             key: "1",
             child: [
                 {
-                    title: "设备状态",
+                    title: t('menu.devicestatus'),
                     key: "1-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: "DHCP状态信息",
+                    title: t('menu.dhcpinfo'),
                     key: "1-2",
                     route: "",
                     show: 1//隐藏位
                 },
                 {
-                    title: "WIFI-2.4G状态信息",
+                    title: t('menu.wifi2info'),
                     key: "1-3",
                     route: "",
                     show: 2
                 },
                 {
-                    title: "WIFI-5G状态信息",
+                    title: t('menu.wifi5info'),
                     key: "1-4",
                     route: "",
                     show: 3
@@ -33,19 +35,19 @@ const state = {
             ]
         },
         {
-            title: "上网设置",
+            title: t('menu.networkset'),
             icon: "ControlOutlined",
             key: "2",
             child: [
                 {
-                    title: "上网设置",
+                    title: t('menu.networkset'),
                     key: "2-1",
                     route: "",
                     show: true
                 },
 
                 {
-                    title: "ANDLINK",
+                    title: t('menu.andlink'),
                     key: "2-2",
                     route: "",
                     show: 4
@@ -53,30 +55,30 @@ const state = {
             ]
         },
         {
-            title: "Wi-Fi配置",
+            title: t('menu.wifiSet'),
             icon: "WifiOutlined",
             key: "3",
             child: [
                 {
-                    title: "Wi-Fi配置",
+                    title: t('menu.wifiSet'),
                     key: "3-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: "辅Wi-Fi配置",
+                    title: t('menu.secwifiset'),
                     key: "3-2",
                     route: "",
                     show: 5
                 },
                 {
-                    title: "Wi-Fi定时",
+                    title: t('menu.wifitiming'),
                     key: "3-3",
                     route: "",
                     show: true
                 },
                 {
-                    title: "WPS配置",
+                    title: t('menu.wpsset'),
                     key: "3-4",
                     route: "",
                     show: true
@@ -84,12 +86,12 @@ const state = {
             ]
         },
         {
-            title: "终端信息",
+            title: t('menu.terminalInfo'),
             icon: "HddOutlined",
             key: "4",
             child: [
                 {
-                    title: "终端信息",
+                    title: t('menu.terminalInfo'),
                     key: "4-1",
                     route: "",
                     show: true
@@ -97,24 +99,24 @@ const state = {
             ]
         },
         {
-            title: "设备配置",
+            title: t('menu.deviceset'),
             icon: "MobileOutlined",
             key: "5",
             child: [
                 {
-                    title: "DHCP配置",
+                    title: t('menu.dhcpset'),
                     key: "5-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: "路由设置",
+                    title: t('menu.routeset'),
                     key: "5-2",
                     route: "",
                     show: true
                 },
                 {
-                    title: "MESH",
+                    title: t('menu.mesh'),
                     key: "5-3",
                     route: "",
                     show: true
@@ -122,50 +124,50 @@ const state = {
             ]
         },
         {
-            title: "安全设置",
+            title: t('menu.safeset'),
             icon: "SafetyCertificateOutlined",
             key: "6",
             child: [
-                { title: "DMZ", key: "6-1", route: "", show: true },
+                { title: t('menu.dmz'), key: "6-1", route: "", show: true },
                 {
-                    title: "端口映射",
+                    title: t('menu.portmap'),
                     key: "6-2",
                     route: "",
                     show: true
                 },
                 {
-                    title: "过滤规则",
+                    title: t('menu.filterrul'),
                     key: "6-3",
                     route: "",
                     show: true
                 },
                 {
-                    title: "IP MAC绑定",
+                    title: t('menu.ipmacband'),
                     key: "6-4",
                     route: "",
                     show: true
                 },
 
                 {
-                    title: "静态ARP绑定",
+                    title: t('menu.arpband'),
                     key: "6-5",
                     route: "",
                     show: 6
                 },
                 {
-                    title: "ACL过滤",
+                    title: t('menu.acl'),
                     key: "6-6",
                     route: "",
                     show: 7
                 },
                 {
-                    title: "UPNP",
+                    title: t('menu.upnp'),
                     key: "6-7",
                     route: "",
                     show: 8
                 },
                 {
-                    title: "网速限制",
+                    title: t('menu.speed'),
                     key: "6-8",
                     route: "",
                     show: 9
@@ -173,49 +175,49 @@ const state = {
             ]
         },
         {
-            title: "系统管理",
+            title: t('menu.sysset'),
             icon: "SettingOutlined",
             key: "7",
             child: [
                 {
-                    title: "设备信息",
+                    title: t('menu.deviceinfo'),
                     key: "7-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: "系统设置",
+                    title: t('menu.systemset'),
                     key: "7-2",
                     route: "",
                     show: true
                 },
                 {
-                    title: "系统日志",
+                    title: t('menu.syslog'),
                     key: "7-3",
                     route: "",
                     show: true
                 },
                 {
-                    title: "系统升级",
+                    title: t('menu.sysupgrade'),
                     key: "7-4",
                     route: "",
                     show: true
                 },
                 {
-                    title: "网络工具",
+                    title: t('menu.nettools'),
                     key: "7-5",
                     route: "",
                     show: true
                 },
 
                 {
-                    title: "日志导出",
+                    title: t('menu.logexport'),
                     key: "7-6",
                     route: "",
                     show: 10
                 },
                 {
-                    title: "配置升级",
+                    title: t('menu.configup'),
                     key: "7-7",
                     route: "",
                     show: 11
@@ -258,10 +260,10 @@ const state = {
             { name: "device_info", title: "设备信息", show: true }
         ]
     },
-    route: [{ name: "device_status", title: "设备状态", show: true }],
+    route: [{ name: "device_status", title: t('menu.devicestatus'), show: true }],
     breadcrumbItems: {
-        "0": "系统状态",
-        "1": "设备状态"
+        "0": t('menu.sysStatus'),
+        "1": t('menu.devicestatus')
     }
 }
 const getters = {
