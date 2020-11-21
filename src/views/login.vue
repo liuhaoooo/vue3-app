@@ -106,9 +106,7 @@ export default {
     onMounted(() => {
       getNextText();
     });
-    const langChange = (val) =>{
-      setLang(val)
-    }
+    const langChange = (val) =>setLang(val);
     const toLogin = () => {
       validate()
         .then(res => {

@@ -61,7 +61,11 @@ const routes = [
         component: () => import('../views/pages/network/andlink.vue')
       },
       // wifi
-
+      {
+        path: 'wifisetting',
+        name: 'wifisetting',
+        component: () => import('../views/pages/wifi/wifisetting.vue')
+      },
       // system
       {
         path: 'device_info',

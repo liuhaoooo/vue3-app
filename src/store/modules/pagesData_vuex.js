@@ -249,12 +249,15 @@ const state = {
         ],
         '2-1': [
             { name: "broadband", title: "宽带设置", show: true },
-            { name: "/relay_setting", title: "2.4G中继设置", show: 1 },
-            { name: "/relay_setting", title: "5G中继设置", show: 1 },
+            { name: "relay_setting", title: "2.4G中继设置", show: 1 },
+            { name: "relay_setting", title: "5G中继设置", show: 1 },
             { name: "relay", title: "无线中继", show: true }
         ],
         '2-2': [
             { name: "andlink", title: "ANDLINK", show: 1 }
+        ],
+        '3-1': [
+            { name: "wifisetting", title: "Wi-Fi设置", show: true }
         ],
         '7-1': [
             { name: "device_info", title: "设备信息", show: true }

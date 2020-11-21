@@ -2,6 +2,8 @@ const message = {
     "tips": {
         "logout": "确定要退出登录吗?",
         "restart": "确定要重启路由器吗?",
+        "empty":"不能为空",
+        "wepKeyLen":"密钥长度应为"
     },
     "menu":{
        "sysStatus":"系统状态",
@@ -78,19 +80,19 @@ const message = {
             "Route": "路由模式",
             "APClient": "无线中继模式",
             "no": "wan口未连接",
-            "":"------"
+            "undefined":"------"
         },
         "bandwidth_4g_arr": {
             "0": "20MHz",
             "1": "40MHz",
             "2": "20/40MHz",
-            "":"------"
+            "undefined":"------"
         },
         "bandwidth_5g_arr": {
             "0": "20MHz",
             "1": "40MHz",
             "2": "80MHz",
-            "":"------"
+            "undefined":"------"
         },
         "mode_4g_arr": {
             "1": "11b only",
@@ -99,14 +101,14 @@ const message = {
             "0": "11b/g",
             "16": "11g/n/ax",
             "9": "11b/g/n",
-            "":"------"
+            "undefined":"------"
         },
         "mode_5g_arr": {
             "2": "11a only",
             "8": "11a/n",
             "14": "11a/n/ac",
             "17": "11n/ac/ax",
-            "":"------"
+            "undefined":"------"
         },
     }
 

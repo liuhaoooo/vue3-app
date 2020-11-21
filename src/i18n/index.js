@@ -10,5 +10,4 @@ export const i18n = createI18n({
 })
 export const setLang = lang => {
     i18n.global.locale.value = lang
-    console.log(i18n.global.locale.value)
 }
