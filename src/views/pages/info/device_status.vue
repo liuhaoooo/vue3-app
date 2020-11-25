@@ -17,7 +17,7 @@
           <a-descriptions-item
             :label="t('device_status.broadband')"
           >{{t(`device_status.bandwidth_4g_arr['${networkInfo.bandwidth_4g}']`)}}</a-descriptions-item>
-          <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_4g}}</a-descriptions-item>
+          <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_4g||'------'}}</a-descriptions-item>
           <a-descriptions-item
             :label="t('device_status.mode')"
           >{{t(`device_status.mode_4g_arr['${networkInfo.mode_4g}']`)}}</a-descriptions-item>
@@ -33,7 +33,7 @@
           <a-descriptions-item
             :label="t('device_status.broadband')"
           >{{t(`device_status.bandwidth_5g_arr['${networkInfo.bandwidth_5g}']`)}}</a-descriptions-item>
-          <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_5g}}</a-descriptions-item>
+          <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_5g||'------'}}</a-descriptions-item>
           <a-descriptions-item
             :label="t('device_status.mode')"
           >{{t(`device_status.mode_5g_arr['${networkInfo.mode_5g}']`)}}</a-descriptions-item>
@@ -60,7 +60,7 @@
               <a-descriptions-item
                 :label="t('device_status.broadband')"
               >{{t(`device_status.bandwidth_4g_arr['${networkInfo.bandwidth_4g}']`)}}</a-descriptions-item>
-              <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_4g}}</a-descriptions-item>
+              <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_4g||'------'}}</a-descriptions-item>
               <a-descriptions-item
                 :label="t('device_status.mode')"
               >{{t(`device_status.mode_4g_arr['${networkInfo.mode_4g}']`)}}</a-descriptions-item>
@@ -71,7 +71,7 @@
               <a-descriptions-item
                 :label="t('device_status.broadband')"
               >{{t(`device_status.bandwidth_5g_arr['${networkInfo.bandwidth_5g}']`)}}</a-descriptions-item>
-              <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_5g}}</a-descriptions-item>
+              <a-descriptions-item :label="t('device_status.channel')">{{networkInfo.channel_5g||'------'}}</a-descriptions-item>
               <a-descriptions-item
                 :label="t('device_status.mode')"
               >{{t(`device_status.mode_5g_arr['${networkInfo.mode_5g}']`)}}</a-descriptions-item>

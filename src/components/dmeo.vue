@@ -37,6 +37,9 @@ export default {
     watch(count, (n, o) => {
       console.log(n, "--------", o);
     });
+    watch(() => obj['1'], (newValue, oldValue) => {
+
+    })
     watch(msg, () => {
       console.log(msg.value, "============");
     });
