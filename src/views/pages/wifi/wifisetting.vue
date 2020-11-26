@@ -2,7 +2,7 @@
   <div class="wifi_main">
     <div class="wifi_switch">
       <strong for>Wi-Fi总开关</strong>
-      <a-switch v-model:checked="wifiOpen" @change="wifiOpenChange"/>
+      <a-switch v-model:checked="wifiOpen" @change="wifiOpenChange" />
       <span>关闭Wi-Fi总开关后，连接到该Wi-Fi的设备将会断开</span>
     </div>
     <div class="wifi_switch" v-if="wifiOpen">
@@ -56,7 +56,7 @@
                 </a-select>
               </a-form-item>
               <a-form-item label="密码" :rules="rules_2g['key']" name="key">
-                <a-input v-model:value="wifi24.key" type="password" />
+                <a-input-password v-model:value="wifi24.key" />
               </a-form-item>
             </div>
             <div v-if="wifi24.authenticationType=='WEP'">
@@ -75,7 +75,15 @@
                   <a-select-option value="128">128-bit</a-select-option>
                 </a-select>
               </a-form-item>
-              <a-form-item label="密钥" :rules="rules_2g['key1']" name="key1">
+              <a-form-item
+                label="密钥"
+                :rules="rules_2g['key1']"
+                name="key1"
+                v-if="wifi24.keylen=='64'"
+              >
+                <a-input v-model:value="wifi24.key1" />
+              </a-form-item>
+              <a-form-item label="密钥" :rules="rules_2g['key2']" name="key1" v-else>
                 <a-input v-model:value="wifi24.key1" />
               </a-form-item>
             </div>
@@ -171,7 +179,7 @@
                 </a-select>
               </a-form-item>
               <a-form-item label="密码" :rules="rules_5g['key']" name="key">
-                <a-input v-model:value="wifi5.key" type="password" />
+                <a-input-password v-model:value="wifi5.key" />
               </a-form-item>
             </div>
             <div v-if="wifi5.authenticationType=='WEP'">
@@ -190,7 +198,15 @@
                   <a-select-option value="128">128-bit</a-select-option>
                 </a-select>
               </a-form-item>
-              <a-form-item label="密钥" :rules="rules_5g['key1']" name="key1">
+              <a-form-item
+                label="密钥"
+                :rules="rules_5g['key1']"
+                name="key1"
+                v-if="wifi5.keylen=='64'"
+              >
+                <a-input v-model:value="wifi5.key1" />
+              </a-form-item>
+              <a-form-item label="密钥" :rules="rules_5g['key2']" name="key1" v-else>
                 <a-input v-model:value="wifi5.key1" />
               </a-form-item>
             </div>
@@ -273,7 +289,7 @@ export default {
       let res_wifiOpen = await axiosRequest_get({ cmd: CMD.WIFI_SWITCH });
       wifiOpen.value = res_wifiOpen.masterSwitch == "1";
     };
-    const wifiOpenChange = (e) => {
+    const wifiOpenChange = e => {
       axiosRequest_post({
         cmd: CMD.WIFI_SWITCH,
         masterSwitch: e ? "1" : "0"
@@ -307,7 +323,7 @@ export default {
 };
 // 2.4gwifi相关
 function wifi2g_fn() {
-  const { rules_2g } = rules_fn();
+  const { t } = useI18n();
   const wifi24 = reactive({
     wifiOpen: true,
     ssid: "",
@@ -327,6 +343,24 @@ function wifi2g_fn() {
     wifiWorkMode: "0",
     bandWidth: "0"
   });
+  const required = {
+    required: true,
+    message: t("tips.empty")
+  };
+  const Len = {
+    len: 5,
+    message: t("tips.wepKeyLen") + 5
+  };
+  const Len1 = {
+    len: 13,
+    message: t("tips.wepKeyLen") + 13
+  };
+  const rules_2g = {
+    ssid: [required],
+    key: [required],
+    key1: [required, Len],
+    key2: [required, Len1]
+  };
   const getData = async () => {
     let res_2g = await axiosRequest_get({
       cmd: CMD.WIRELESS_CONFIG,
@@ -359,7 +393,7 @@ function wifi2g_fn() {
 }
 // 5gwifi相关
 function wifi5g_fn() {
-  const { rules_5g } = rules_fn();
+  const { t } = useI18n();
   const wifi5 = reactive({
     wifiOpen: true,
     wifiSames: false,
@@ -380,6 +414,24 @@ function wifi5g_fn() {
     wifiWorkMode: "2",
     bandWidth: "0"
   });
+  const required = {
+    required: true,
+    message: t("tips.empty")
+  };
+  const Len = {
+    len: 5,
+    message: t("tips.wepKeyLen") + 5
+  };
+  const Len1 = {
+    len: 13,
+    message: t("tips.wepKeyLen") + 13
+  };
+  const rules_5g = {
+    ssid: [required],
+    key: [required],
+    key1: [required, Len],
+    key2: [required, Len1]
+  };
   const getData = async () => {
     let res_5g = await axiosRequest_get({
       cmd: CMD.WIRELESS5G_CONFIG,
@@ -408,35 +460,6 @@ function wifi5g_fn() {
   return {
     wifi5,
     wifi5_adv,
-    rules_5g
-  };
-}
-// 校验规则相关
-function rules_fn() {
-  const { t } = useI18n();
-  const keyLen = 5;
-  const required = {
-    required: true,
-    message: t("tips.empty")
-  };
-  const Len = computed(() => {
-    return {
-      len: keyLen,
-      message: t("tips.wepKeyLen") + keyLen
-    };
-  });
-  const rules_2g = {
-    ssid: [required],
-    key: [required],
-    key1: [required, Len.value]
-  };
-  const rules_5g = {
-    ssid: [required],
-    key: [required],
-    key1: [required, Len.value]
-  };
-  return {
-    rules_2g,
     rules_5g
   };
 }
@@ -529,33 +552,33 @@ function options_fn() {
   };
 }
 </script>
-<style>
+<style lang="less">
 .ant-form-vertical .ant-form-item {
   padding-bottom: 0 !important;
 }
 .wifi_main {
   display: flex;
   flex-direction: column;
-}
-.wifi_main > * {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  > * {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .adv_button {
+    color: #1890ff;
+    cursor: pointer;
+    width: 50%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
 }
 .wifi_switch {
   display: flex;
   margin-bottom: 20px;
-}
-.wifi_switch > strong {
-  width: 160px;
-}
-.wifi_switch > span {
-  margin-left: 20px;
-}
-.wifi_main .adv_button {
-  color: #1890ff;
-  cursor: pointer;
-  width: 50%;
-  margin-bottom: 20px;
-  text-align: center;
+  > strong {
+    width: 160px;
+  }
+  > span {
+    margin-left: 20px;
+  }
 }
 </style>

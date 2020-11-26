@@ -108,15 +108,9 @@ function meun(props, ctx) {
   const router = useRouter();
   const selectedKeys = ref(["1-1"]);
   const openKeys = ref(["1"]);
-  const breadcrumbItems = computed(
-    () => store.getters["pagesData_vuex/breadcrumbItems"]
-  );
-  const pages = computed(() => {
-    return store.getters["pagesData_vuex/pages"];
-  });
-  const routes = computed(() => {
-    return store.getters["pagesData_vuex/route"];
-  });
+  const breadcrumbItems = computed(() => store.getters["pagesData_vuex/breadcrumbItems"]);
+  const pages = computed(() => store.getters["pagesData_vuex/pages"]);
+  const routes = computed(() => store.getters["pagesData_vuex/route"]);
   const openClick = keyArr => {
     let i = keyArr[keyArr.length - 1];
     openKeys.value = [i];
@@ -157,7 +151,7 @@ function route(props, ctx) {
   };
 }
 </script>
-<style>
+<style lang="less">
 .body {
   width: 100vw;
   height: 100vh;
@@ -170,13 +164,8 @@ function route(props, ctx) {
   background: url(../assets/images/background.jpg) no-repeat;
   background-size: cover;
 }
-
-.ant-layout,
-.ant-layout * {
-  /* border-radius: 5px !important; */
-}
 .ant-layout-has-sider {
-  height: calc(100vh - 104px);
+  height: calc(~"100vh - 104px");
 }
 .footer {
   width: 100%;

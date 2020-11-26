@@ -13,16 +13,20 @@
       </div>
       <div class="header_info3">
         <div>
-          <SendOutlined />&nbsp;{{t('header.step')}}
+          <SendOutlined />
+          &nbsp;{{t('header.step')}}
         </div>
         <div @mouseover="show_qr=true" @mouseout="show_qr=false">
-          <TabletOutlined />&nbsp;{{t('header.appdow')}}
+          <TabletOutlined />
+          &nbsp;{{t('header.appdow')}}
         </div>
         <div @click="restart">
-          <ReloadOutlined />&nbsp;{{t('header.restart')}}
+          <ReloadOutlined />
+          &nbsp;{{t('header.restart')}}
         </div>
         <div @click="logout">
-          <LogoutOutlined />&nbsp;{{t('header.logout')}}
+          <LogoutOutlined />
+          &nbsp;{{t('header.logout')}}
         </div>
       </div>
     </div>
@@ -32,9 +36,12 @@
     <br />
     <div>
       {{t('header.qr1')}}
-      <br />{{t('header.qr2')}}<br />
+      <br />
+      {{t('header.qr2')}}
+      <br />
       <span style="color: rgb(30, 109, 255);">{{t('header.qr3')}}</span>
-      <br />{{t('header.qr4')}}
+      <br />
+      {{t('header.qr4')}}
     </div>
   </div>
 </template>
@@ -54,7 +61,7 @@ import { useRoute, useRouter } from "vue-router";
 import { axiosRequest_post, axiosRequest_get } from "../utils/request";
 import { logout_tool, restart_tool } from "../utils/tools";
 import { Modal } from "ant-design-vue";
-import { useI18n } from 'vue-i18n'
+import { useI18n } from "vue-i18n";
 import {
   WifiOutlined,
   LogoutOutlined,
@@ -71,7 +78,7 @@ export default {
     SendOutlined
   },
   setup(props, ctx) {
-    const { t } = useI18n()
+    const { t } = useI18n();
     return {
       t,
       ...right(props, ctx),
@@ -82,10 +89,10 @@ export default {
 //右边操作栏
 function right(props, ctx) {
   const router = useRouter();
-  const { t } = useI18n()
+  const { t } = useI18n();
   const show_qr = ref(false);
-  const logout = () => logout_tool(t('tips.logout'));
-  const restart = () => restart_tool(t('tips.restart'));
+  const logout = () => logout_tool(t("tips.logout"));
+  const restart = () => restart_tool(t("tips.restart"));
   return {
     logout,
     restart,
@@ -118,7 +125,7 @@ function status(props, ctx) {
   };
 }
 </script>
-<style>
+<style lang="less">
 .header_div {
   display: flex;
   height: 70px;
@@ -128,19 +135,19 @@ function status(props, ctx) {
   background: #ffffff;
   border-radius: 5px;
   padding: 5px;
-}
-.header_div > .header_logo {
-  width: 200px;
-  height: 85%;
-  margin-left: 10px;
-  background: url(../assets/images/logo.png) no-repeat;
-  background-size: contain;
-}
-.header_div > .header_info {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  align-items: center;
+  > .header_logo {
+    width: 200px;
+    height: 85%;
+    margin-left: 10px;
+    background: url(../assets/images/logo.png) no-repeat;
+    background-size: contain;
+  }
+  > .header_info {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
 }
 .header_info1 {
   font-size: 20px;
@@ -152,6 +159,12 @@ function status(props, ctx) {
   display: flex;
   align-items: center;
   justify-content: center;
+  > div {
+    font-size: 16px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+  }
 }
 .header_info3 {
   display: flex;
@@ -159,17 +172,11 @@ function status(props, ctx) {
   align-items: center;
   height: 100%;
   width: 400px;
-}
-.header_info3 > div {
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-}
-.header_info2 > div {
-  font-size: 16px;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
+  > div {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+  }
 }
 .qr_div {
   position: absolute;
@@ -182,14 +189,14 @@ function status(props, ctx) {
   padding-bottom: 80px;
   border-radius: 4px;
   right: 260px;
-}
-.qr_div > img {
-  width: 100%;
-  height: 100%;
-}
-.qr_div > div {
-  color: #666;
-  text-align: center;
-  font-size: 12px;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+  > div {
+    color: #666;
+    text-align: center;
+    font-size: 12px;
+  }
 }
 </style>

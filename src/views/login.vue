@@ -106,7 +106,7 @@ export default {
     onMounted(() => {
       getNextText();
     });
-    const langChange = (val) =>setLang(val);
+    const langChange = val => setLang(val);
     const toLogin = () => {
       validate()
         .then(res => {
@@ -168,7 +168,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="less">
 .login_content {
   width: 100vw;
   height: 100vh;
@@ -184,20 +184,20 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.login_main > label {
-  color: #ffffff;
-  font-size: 20px;
-}
-.login_main > p {
-  color: #cecece;
-  font-size: 14px;
-  cursor: pointer;
-}
-.login_main > * {
-  margin-bottom: 20px;
-  margin-top: 20px !important;
-  width: 240px;
+  > * {
+    margin-bottom: 20px;
+    margin-top: 20px !important;
+    width: 240px;
+  }
+  > label {
+    color: #ffffff;
+    font-size: 20px;
+  }
+  > p {
+    color: #cecece;
+    font-size: 14px;
+    cursor: pointer;
+  }
 }
 .login_button {
   cursor: pointer;
@@ -207,10 +207,10 @@ export default {
   align-items: center;
   color: #ffffff;
   font-size: 18px;
-}
-.login_qr > img {
-  width: 100px;
-  height: 100px;
-  margin-right: 10px;
+  > img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
 }
 </style>
