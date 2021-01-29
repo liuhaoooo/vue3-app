@@ -3,7 +3,9 @@
     <a-tab-pane :key="index" :tab="item.title" v-for="(item ,index) in routes"></a-tab-pane>
   </a-tabs>
   <div class="index_content">
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
