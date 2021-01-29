@@ -60,7 +60,6 @@ import { CMD } from "../config/cmd";
 import { useRoute, useRouter } from "vue-router";
 import { axiosRequest_post, axiosRequest_get } from "../utils/request";
 import { logout_tool, restart_tool } from "../utils/tools";
-import { Modal } from "ant-design-vue";
 import { useI18n } from "vue-i18n";
 import {
   WifiOutlined,

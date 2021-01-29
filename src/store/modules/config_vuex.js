@@ -18,7 +18,6 @@ const mutations = {
 const actions = {
     getConfigInfo: async (state, data) => {
         let res = await axiosRequest_get({ cmd: CMD.INIT_PAGE });
-        console.log(res)
         state.commit('setConfigInfo', res)
     },
 }

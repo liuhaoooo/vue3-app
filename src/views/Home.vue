@@ -24,13 +24,15 @@
           </a-menu>
         </a-layout-sider>
         <a-layout style="padding: 0 24px 24px;">
-          <a-breadcrumb style="margin: 10px 0">
-            <a-breadcrumb-item>{{breadcrumbItems['0']}}</a-breadcrumb-item>
-            <a-breadcrumb-item>{{breadcrumbItems['1']}}</a-breadcrumb-item>
-          </a-breadcrumb>
-          <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0}">
-            <index :routes="routes" />
-          </a-layout-content>
+          <a-spin :spinning="loading" size="large">
+            <a-breadcrumb style="margin: 10px 0">
+              <a-breadcrumb-item>{{breadcrumbItems['0']}}</a-breadcrumb-item>
+              <a-breadcrumb-item>{{breadcrumbItems['1']}}</a-breadcrumb-item>
+            </a-breadcrumb>
+            <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0}">
+              <index :routes="routes" />
+            </a-layout-content>
+          </a-spin>
         </a-layout>
       </a-layout>
     </a-layout>
@@ -67,6 +69,7 @@ import {
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { CMD } from "../config/cmd";
+import { useI18n } from "vue-i18n";
 import { axiosRequest_get } from "../utils/request";
 import index from "../components/index.vue";
 import herderHome from "../components/header.vue";
@@ -87,6 +90,9 @@ export default {
     SettingOutlined
   },
   setup(props, ctx) {
+    const { t } = useI18n();
+    const store = useStore();
+    const loading = computed(()=>store.getters['sysStatus_vuex/loading'])
     onMounted(() => {
       clearInterval(window.getStatus_Interval);
       window.getStatus_Interval = setInterval(() => {
@@ -97,6 +103,8 @@ export default {
       clearInterval(window.getStatus_Interval);
     });
     return {
+      t,
+      loading,
       ...meun(props, ctx),
       ...route(props, ctx)
     };
@@ -108,7 +116,9 @@ function meun(props, ctx) {
   const router = useRouter();
   const selectedKeys = ref(["1-1"]);
   const openKeys = ref(["1"]);
-  const breadcrumbItems = computed(() => store.getters["pagesData_vuex/breadcrumbItems"]);
+  const breadcrumbItems = computed(
+    () => store.getters["pagesData_vuex/breadcrumbItems"]
+  );
   const pages = computed(() => store.getters["pagesData_vuex/pages"]);
   const routes = computed(() => store.getters["pagesData_vuex/route"]);
   const openClick = keyArr => {
@@ -122,7 +132,7 @@ function meun(props, ctx) {
     });
     store.commit("pagesData_vuex/setBreadcrumbItems", {
       index: "0",
-      value: pages.value[i-1].title
+      value: pages.value[i - 1].title
     });
     router.push({ name: routes.value[0].name });
   };
@@ -172,5 +182,10 @@ function route(props, ctx) {
   text-align: center;
   color: #ffffff;
   font-size: 12px;
+}
+.ant-spin-nested-loading > div > .ant-spin{
+  height: 100vh !important;
+  max-height:100vh !important;
+  position: fixed !important
 }
 </style>

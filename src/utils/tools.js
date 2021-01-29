@@ -102,3 +102,6 @@ export const rsaDec_tool = data => {
     result = JSON.parse(result)
     return result
 }
+export const loading_tool = val =>{
+    store.commit('sysStatus_vuex/setLoading',val) 
+}

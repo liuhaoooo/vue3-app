@@ -23,14 +23,12 @@ export default {
     const store = useStore();
     const tabsChange = index => {
       store.commit("pagesData_vuex/setBreadcrumbItems", {
-        index:'1',
-        value:routes.value[index].title
+        index: "1",
+        value: routes.value[index].title
       });
-      router.push({name:routes.value[index].name});
+      router.push({ name: routes.value[index].name });
     };
-    onMounted(async () => {
-      
-    });
+    onMounted(async () => {});
     return {
       tabsChange,
       routes
@@ -41,9 +39,21 @@ export default {
 <style lang="less">
 .index_content {
   overflow-y: auto;
-  height: calc(~"100% - 50px") !important;
+  height: calc(~"100vh - 314px") !important;
 }
-.index_content::-webkit-scrollbar{width: 5px;height:5px;background-color:#82c9ff;}/*定义滚动条轨道 内阴影+圆角*/
-.index_content::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px #e7e7e7;border-radius: 10px; background-color:#e7e7e7;}/*定义滑块 内阴影+圆角*/
-.index_content::-webkit-scrollbar-thumb{border-radius: 10px;-webkit-box-shadow: inset 0 0 6px #cbe7fc;background-color:#82c9ff;}
+.index_content::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #82c9ff;
+} /*定义滚动条轨道 内阴影+圆角*/
+.index_content::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #e7e7e7;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+} /*定义滑块 内阴影+圆角*/
+.index_content::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px #cbe7fc;
+  background-color: #82c9ff;
+}
 </style>

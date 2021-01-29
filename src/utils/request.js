@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '../router'
 import { message } from 'ant-design-vue';
-import { rsaEnc_tool, rsaDec_tool } from "../utils/tools";
+import { rsaEnc_tool, rsaDec_tool,loading_tool } from "../utils/tools";
 message.config({
   top: `150px`,
   duration: 3,
@@ -17,6 +17,7 @@ request.interceptors.request.use((config) => {
   return config;
 }, (error) => {
   message.error('请求出错，请检查网络')
+  loading_tool(false)
   return Promise.reject(error);
 });
 
@@ -28,6 +29,7 @@ request.interceptors.response.use((response) => {
   return response.data;
 }, (error) => {
   message.error('请求出错，请检查网络')
+  loading_tool(false)
   return Promise.reject(error);
 });
 

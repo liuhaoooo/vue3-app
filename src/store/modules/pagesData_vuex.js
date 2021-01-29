@@ -4,30 +4,30 @@ const { t } = i18n.global
 const state = {
     pages: [
         {
-            title: t('menu.sysStatus'),
+            title: 'menu.sysStatus',
             icon: "CopyOutlined",
             key: "1",
             child: [
                 {
-                    title: t('menu.devicestatus'),
+                    title: 'menu.devicestatus',
                     key: "1-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.dhcpinfo'),
+                    title: 'menu.dhcpinfo',
                     key: "1-2",
                     route: "",
                     show: 1//隐藏位
                 },
                 {
-                    title: t('menu.wifi2info'),
+                    title: 'menu.wifi2info',
                     key: "1-3",
                     route: "",
                     show: 2
                 },
                 {
-                    title: t('menu.wifi5info'),
+                    title: 'menu.wifi5info',
                     key: "1-4",
                     route: "",
                     show: 3
@@ -35,19 +35,19 @@ const state = {
             ]
         },
         {
-            title: t('menu.networkset'),
+            title: 'menu.networkset',
             icon: "ControlOutlined",
             key: "2",
             child: [
                 {
-                    title: t('menu.networkset'),
+                    title: 'menu.networkset',
                     key: "2-1",
                     route: "",
                     show: true
                 },
 
                 {
-                    title: t('menu.andlink'),
+                    title: 'menu.andlink',
                     key: "2-2",
                     route: "",
                     show: 4
@@ -55,30 +55,30 @@ const state = {
             ]
         },
         {
-            title: t('menu.wifiSet'),
+            title: 'menu.wifiSet',
             icon: "WifiOutlined",
             key: "3",
             child: [
                 {
-                    title: t('menu.wifiSet'),
+                    title: 'menu.wifiSet',
                     key: "3-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.secwifiset'),
+                    title: 'menu.secwifiset',
                     key: "3-2",
                     route: "",
                     show: 5
                 },
                 {
-                    title: t('menu.wifitiming'),
+                    title: 'menu.wifitiming',
                     key: "3-3",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.wpsset'),
+                    title: 'menu.wpsset',
                     key: "3-4",
                     route: "",
                     show: true
@@ -86,12 +86,12 @@ const state = {
             ]
         },
         {
-            title: t('menu.terminalInfo'),
+            title: 'menu.terminalInfo',
             icon: "HddOutlined",
             key: "4",
             child: [
                 {
-                    title: t('menu.terminalInfo'),
+                    title: 'menu.terminalInfo',
                     key: "4-1",
                     route: "",
                     show: true
@@ -99,24 +99,24 @@ const state = {
             ]
         },
         {
-            title: t('menu.deviceset'),
+            title: 'menu.deviceset',
             icon: "MobileOutlined",
             key: "5",
             child: [
                 {
-                    title: t('menu.dhcpset'),
+                    title: 'menu.dhcpset',
                     key: "5-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.routeset'),
+                    title: 'menu.routeset',
                     key: "5-2",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.mesh'),
+                    title: 'menu.mesh',
                     key: "5-3",
                     route: "",
                     show: true
@@ -124,50 +124,50 @@ const state = {
             ]
         },
         {
-            title: t('menu.safeset'),
+            title: 'menu.safeset',
             icon: "SafetyCertificateOutlined",
             key: "6",
             child: [
-                { title: t('menu.dmz'), key: "6-1", route: "", show: true },
+                { title: 'menu.dmz', key: "6-1", route: "", show: true },
                 {
-                    title: t('menu.portmap'),
+                    title: 'menu.portmap',
                     key: "6-2",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.filterrul'),
+                    title: 'menu.filterrul',
                     key: "6-3",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.ipmacband'),
+                    title: 'menu.ipmacband',
                     key: "6-4",
                     route: "",
                     show: true
                 },
 
                 {
-                    title: t('menu.arpband'),
+                    title: 'menu.arpband',
                     key: "6-5",
                     route: "",
                     show: 6
                 },
                 {
-                    title: t('menu.acl'),
+                    title: 'menu.acl',
                     key: "6-6",
                     route: "",
                     show: 7
                 },
                 {
-                    title: t('menu.upnp'),
+                    title: 'menu.upnp',
                     key: "6-7",
                     route: "",
                     show: 8
                 },
                 {
-                    title: t('menu.speed'),
+                    title: 'menu.speed',
                     key: "6-8",
                     route: "",
                     show: 9
@@ -175,49 +175,49 @@ const state = {
             ]
         },
         {
-            title: t('menu.sysset'),
+            title: 'menu.sysset',
             icon: "SettingOutlined",
             key: "7",
             child: [
                 {
-                    title: t('menu.deviceinfo'),
+                    title: 'menu.deviceinfo',
                     key: "7-1",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.systemset'),
+                    title: 'menu.systemset',
                     key: "7-2",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.syslog'),
+                    title: 'menu.syslog',
                     key: "7-3",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.sysupgrade'),
+                    title: 'menu.sysupgrade',
                     key: "7-4",
                     route: "",
                     show: true
                 },
                 {
-                    title: t('menu.nettools'),
+                    title: 'menu.nettools',
                     key: "7-5",
                     route: "",
                     show: true
                 },
 
                 {
-                    title: t('menu.logexport'),
+                    title: 'menu.logexport',
                     key: "7-6",
                     route: "",
                     show: 10
                 },
                 {
-                    title: t('menu.configup'),
+                    title: 'menu.configup',
                     key: "7-7",
                     route: "",
                     show: 11
@@ -273,9 +273,11 @@ const getters = {
     pages: state => {
         let pages = JSON.parse(JSON.stringify(state.pages))
         for (let n in pages) {
+            pages[n].title = t(pages[n].title)
             let child = pages[n].child, newChild = [];
             if (child.length > 0) {
                 for (let i in child) {
+                    child[i].title = t(child[i].title)
                     if (pageHideCheck_tool(child[i].show) || child[i].show === true) {
                         newChild.push(child[i])
                     }

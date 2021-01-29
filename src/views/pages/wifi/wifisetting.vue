@@ -274,27 +274,55 @@ import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 import { CMD } from "@/config/cmd";
 import { Base64 } from "js-base64";
+import { useStore } from "vuex";
+import { Modal,message } from "ant-design-vue";
+import {loading_tool} from "@/utils/tools.js"
 import { axiosRequest_get, axiosRequest_post } from "@/utils/request";
 export default {
   components: { DownOutlined, UpOutlined },
   setup() {
     const { t } = useI18n();
+    const store = useStore();
     const wifiOpen = ref(false);
     const form_2g = ref(null);
     const form_5g = ref(null);
     onMounted(() => {
       getData();
     });
+    const meshOpen = computed(() => store.getters["sysStatus_vuex/meshOpen"]);
     const getData = async () => {
+      store.dispatch("sysStatus_vuex/getMeshStatus");
       let res_wifiOpen = await axiosRequest_get({ cmd: CMD.WIFI_SWITCH });
       wifiOpen.value = res_wifiOpen.masterSwitch == "1";
     };
     const wifiOpenChange = e => {
+      if (!e && meshOpen.value) {
+        Modal.confirm({
+          title: "关闭WIFI会导致MESH中断。",
+          centered: true,
+          okText: "确定",
+          cancelText: "取消",
+          onOk() {
+            postWifiSwitch(e);
+          },
+          onCancel(){
+            wifiOpen.value = !e
+          }
+        });
+        return;
+      }
+      postWifiSwitch(e);
+    };
+    const postWifiSwitch = e => {
+      loading_tool(true)
       axiosRequest_post({
         cmd: CMD.WIFI_SWITCH,
         masterSwitch: e ? "1" : "0"
       }).then(res => {
-        console.log(res);
+        setTimeout(()=>{
+          loading_tool(false)
+          message.success('设置成功')
+        },3000)
       });
     };
     const submit = e => {
@@ -310,6 +338,7 @@ export default {
     };
     return {
       t,
+      meshOpen,
       wifiOpen,
       wifiOpenChange,
       submit,
