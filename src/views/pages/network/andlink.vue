@@ -1,6 +1,7 @@
 <template>
   <div ref="info" class="content">
-    
+    <h1>123123
+    </h1>
   </div>
 </template>
 
